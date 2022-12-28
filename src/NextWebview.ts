@@ -2,6 +2,7 @@ import * as vscode from 'vscode'
 import * as fs from 'fs'
 import { nanoid } from 'nanoid'
 import { Midi } from '@tonejs/midi'
+import { IMessage } from './shared/types'
 
 type NextWebviewOptions = {
   extensionUri: vscode.Uri
@@ -157,9 +158,11 @@ export class NextWebviewPanel extends NextWebview implements vscode.Disposable {
     )
   }
 
-  handleMessage(message: string) {
-    console.log(message)
-    this.panel.webview.postMessage(this.getData())
+  handleMessage(message: IMessage) {
+    switch (message.type) {
+      case 'request':
+        this.panel.webview.postMessage(this.getData())
+    }
   }
 
   // Panel updates may also update the panel title
