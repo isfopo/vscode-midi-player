@@ -168,7 +168,6 @@ export class NextWebviewPanel extends NextWebview implements vscode.Disposable {
   // Panel updates may also update the panel title
   // in addition to the webview content.
   public update() {
-    console.debug('Updating! ', this._opts.viewId)
     this.panel.title = this._opts.title
     this.panel.webview.html = this._getContent(this.panel.webview)
   }
