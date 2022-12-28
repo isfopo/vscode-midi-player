@@ -55,8 +55,6 @@
     "zustand": "^3.5.12"
   },
   "activationEvents": [
-    "onCommand:NextWebview1.start",
-    "onCommand:NextWebview2.start",
     "onCommand:Midi.open"
   ],
   "contributes": {
