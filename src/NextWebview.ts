@@ -1,8 +1,8 @@
 import * as vscode from 'vscode'
 import * as fs from 'fs'
-import { nanoid } from 'nanoid'
 import { Midi } from '@tonejs/midi'
 import { IMessage } from './shared/types'
+import { getNonce } from './helpers/getNonce'
 
 type NextWebviewOptions = {
   extensionUri: vscode.Uri
@@ -30,7 +30,7 @@ abstract class NextWebview {
           options.extensionUri,
           'out/webviews/style.css'
         ),
-        nonce: nanoid(),
+        nonce: getNonce(),
         handleMessage: () => {},
       },
       options

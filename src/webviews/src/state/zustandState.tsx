@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid'
 import create, { State, StateCreator, UseStore } from 'zustand'
 import { persist, StateStorage } from 'zustand/middleware'
 import VSCodeAPI from '../VSCodeAPI'
