@@ -4,7 +4,9 @@ import { IMessage } from '../../shared/types'
 declare const acquireVsCodeApi: Function
 
 interface VSCodeApi {
-  getState: () => any
+  getState: () => {
+    [key: string]: string
+  }
   setState: (newState: any) => any
   postMessage: (message: any) => void
 }
@@ -32,7 +34,9 @@ class VSCodeWrapper {
     return () => window.removeEventListener('message', callback)
   }
 
-  public getState = (): any => {
+  public getState = (): {
+    [key: string]: string
+  } => {
     return this.vscodeApi.getState() ?? {}
   }
 
