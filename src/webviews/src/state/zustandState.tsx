@@ -9,7 +9,7 @@ import VSCodeAPI from '../VSCodeAPI'
  * @template TState
  * @param {string} name A globally-unique name for the store.
  * @param {StateCreator<TState>} createState A function which creates the initial state.
- * @return {*}  {UseStore<TState>}
+ * @return {*}  {typeof useStore}
  */
 export default function createVSCodeZustand<TState extends unknown>(
   name: string,
