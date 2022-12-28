@@ -46,8 +46,8 @@ export function activate(context: vscode.ExtensionContext) {
               const webview = NextWebviewPanel.getInstance({
                 extensionUri: context.extensionUri,
                 fileUri: uri,
-                route: 'view2',
-                title: 'GitHub Next Webview 2',
+                route: 'view1',
+                title: 'GitHub Next Webview 1',
                 viewId: 'ghnextB',
               })
             }
