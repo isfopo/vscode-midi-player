@@ -5,6 +5,7 @@
 // } from '@hediet/node-reload'
 // import { Disposable } from '@hediet/std/disposable'
 import * as vscode from 'vscode'
+import { getFilename } from './helpers/files'
 // import MyWebview from './MyWebview'
 import { NextWebviewPanel } from './NextWebview'
 
@@ -47,7 +48,7 @@ export function activate(context: vscode.ExtensionContext) {
                 extensionUri: context.extensionUri,
                 fileUri: uri,
                 route: 'view1',
-                title: 'GitHub Next Webview 1',
+                title: getFilename(uri),
                 viewId: 'ghnextB',
               })
             }
