@@ -1,4 +1,4 @@
-import create, { State, StateCreator, UseStore } from 'zustand'
+import create, { StateCreator, useStore } from 'zustand'
 import { persist, StateStorage } from 'zustand/middleware'
 import VSCodeAPI from '../VSCodeAPI'
 
@@ -11,10 +11,10 @@ import VSCodeAPI from '../VSCodeAPI'
  * @param {StateCreator<TState>} createState A function which creates the initial state.
  * @return {*}  {UseStore<TState>}
  */
-export default function createVSCodeZustand<TState extends State>(
+export default function createVSCodeZustand<TState extends unknown>(
   name: string,
   createState: StateCreator<TState>
-): UseStore<TState> {
+): typeof useStore {
   return create(
     persist(createState, {
       name,
@@ -32,5 +32,8 @@ const VSCodeStateStorage: StateStorage = {
       ...VSCodeAPI.getState(),
       [name]: value,
     })
+  },
+  removeItem: function (name: string): void | Promise<void> {
+    throw new Error('Function not implemented.')
   },
 }
