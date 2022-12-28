@@ -24,6 +24,10 @@ export const AppRoutes = () => {
     }
   }, [])
 
+  if (!midi) {
+    return <p>loading</p>
+  }
+
   return (
     <Routes>
       <Route path="view1" element={<MainView midi={midi} />} />

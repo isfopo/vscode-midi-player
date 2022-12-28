@@ -34,6 +34,12 @@ const VSCodeStateStorage: StateStorage = {
     })
   },
   removeItem: function (name: string): void | Promise<void> {
-    throw new Error('Function not implemented.')
+    const currentState = VSCodeAPI.getState()
+
+    delete currentState[name]
+
+    return VSCodeAPI.setState({
+      ...currentState,
+    })
   },
 }
