@@ -142,7 +142,6 @@ export class NextWebviewPanel extends NextWebview implements vscode.Disposable {
     // Update the content based on view changes
     this.panel.onDidChangeViewState(
       e => {
-        console.debug('View state changed! ', this._opts.viewId)
         if (this.panel.visible) {
           this.update()
         }
