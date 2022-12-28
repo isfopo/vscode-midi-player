@@ -37,7 +37,7 @@ abstract class NextWebview {
     )
   }
 
-  protected getWebviewOptions(): vscode.WebviewOptions {
+  protected get options(): vscode.WebviewOptions {
     return {
       enableScripts: true,
       localResourceRoots: [
@@ -130,7 +130,7 @@ export class NextWebviewPanel extends NextWebview implements vscode.Disposable {
       opts.route,
       opts.title,
       opts.column || vscode.ViewColumn.One,
-      this.getWebviewOptions()
+      this.options
     )
     // Update the content
     this.update()
@@ -203,7 +203,7 @@ export class NextWebviewSidebar
   ): void | Thenable<void> {
     // Create the webviewView and configure it
     this._webview = webviewView
-    this._webview.webview.options = this.getWebviewOptions()
+    this._webview.webview.options = this.options
     // Set the initial html
     this.update()
     // Handle messages from the webview
