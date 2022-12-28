@@ -1,31 +1,6 @@
-// import {
-//   enableHotReload,
-//   hotRequireExportedFn,
-//   registerUpdateReconciler,
-// } from '@hediet/node-reload'
-// import { Disposable } from '@hediet/std/disposable'
 import * as vscode from 'vscode'
 import { getFilename } from './helpers/files'
-// import MyWebview from './MyWebview'
 import { NextWebviewPanel } from './NextWebview'
-
-// if (process.env.NODE_ENV === 'development') {
-//   enableHotReload({ entryModule: module })
-// }
-// registerUpdateReconciler(module)
-
-// export class Extension {
-//   public readonly dispose = Disposable.fn()
-
-//   constructor() {
-//     super()
-
-//     // Disposables are disposed automatically on reload.
-//     const item = this.dispose.track(vscode.window.createStatusBarItem())
-//     item.text = 'Hallo Welt'
-//     item.show()
-//   }
-// }
 
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
@@ -56,8 +31,4 @@ export function activate(context: vscode.ExtensionContext) {
         })
     })
   )
-
-  // context.subscriptions.push(
-  //   hotRequireExportedFn(module, Extension, Extension => new Extension())
-  // )
 }
