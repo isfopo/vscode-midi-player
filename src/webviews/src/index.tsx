@@ -34,7 +34,9 @@ function AppRoutes() {
   let location = useLocation()
   let navigate = useNavigate()
   useEffect(() => {
-    navigate(`/${rootEl.dataset.route}`, { replace: true })
+    if (rootEl) {
+      navigate(`/${rootEl.dataset.route}`, { replace: true })
+    }
   }, [])
 
   return (
@@ -47,7 +49,7 @@ function AppRoutes() {
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router initialEntries={[rootEl.dataset.route]} initialIndex={0}>
+    <Router initialEntries={[rootEl?.dataset.route ?? '']} initialIndex={0}>
       <AppRoutes />
     </Router>
   </React.StrictMode>,
