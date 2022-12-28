@@ -173,12 +173,8 @@ export class NextWebviewPanel extends NextWebview implements vscode.Disposable {
   }
 
   public dispose() {
-    // Disposes of this instance
-    // Next time getInstance() is called, it will construct a new instance
-    console.debug('Disposing! ', this._opts.viewId)
     delete NextWebviewPanel.instances[this._opts.viewId]
 
-    // Clean up our resources
     this.panel.dispose()
     while (this._disposables.length) {
       const x = this._disposables.pop()
