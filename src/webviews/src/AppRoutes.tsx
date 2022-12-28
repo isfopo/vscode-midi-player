@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom'
 import { useMidiData } from './hooks/useMidiData'
 import { MainView } from './views/MainView'
-import VSCodeAPI from './VSCodeAPI'
+import { VSCodeProgressRing as ProgressRing } from '@vscode/webview-ui-toolkit/react'
 
 const rootEl = document.getElementById('root')
 
@@ -25,7 +25,7 @@ export const AppRoutes = () => {
   }, [])
 
   if (!midi) {
-    return <p>loading</p>
+    return <ProgressRing />
   }
 
   return (
