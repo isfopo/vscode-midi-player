@@ -160,7 +160,7 @@ export class NextWebviewPanel extends NextWebview implements vscode.Disposable {
 
   handleMessage(message: IMessage) {
     switch (message.type) {
-      case 'request':
+      case 'fetch':
         this.panel.webview.postMessage(this.getData())
     }
   }
