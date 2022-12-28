@@ -57,10 +57,22 @@
     "zustand": "^3.5.12"
   },
   "activationEvents": [
+    "onCommand:NextWebview1.start",
+    "onCommand:NextWebview2.start",
     "onCommand:Midi.open"
   ],
   "contributes": {
     "commands": [
+      {
+        "command": "NextWebview1.start",
+        "title": "Open Webview 1",
+        "category": "GitHub Next"
+      },
+      {
+        "command": "NextWebview2.start",
+        "title": "Open Webview 2",
+        "category": "GitHub Next"
+      },
       {
         "command": "Midi.open",
         "title": "Open Open Midi File",
