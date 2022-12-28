@@ -28,26 +28,31 @@ import { NextWebviewPanel } from './NextWebview'
 
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
-    vscode.commands.registerCommand('NextWebview1.start', () => {
-      const webview = NextWebviewPanel.getInstance({
-        extensionUri: context.extensionUri,
-        route: 'view1',
-        title: 'GitHub Next Webview 1',
-        viewId: 'ghnextA',
-      })
-      // const webview = MyWebview.createOrShow(context.extensionUri)
-      // setInterval(() => {
-      //   // MyWebview.update()
-      //   console.debug('!!!!!! reloading webview!')
-      // }, 1000)
-    }),
-    vscode.commands.registerCommand('NextWebview2.start', () => {
-      const webview = NextWebviewPanel.getInstance({
-        extensionUri: context.extensionUri,
-        route: 'view2',
-        title: 'GitHub Next Webview 2',
-        viewId: 'ghnextB',
-      })
+    vscode.commands.registerCommand('Midi.open', () => {
+      let openDialogOptions: vscode.OpenDialogOptions = {
+        canSelectFiles: true,
+        canSelectFolders: false,
+        canSelectMany: false,
+        filters: {
+          MIDI: ['mid', 'midi'],
+        },
+      }
+
+      vscode.window
+        .showOpenDialog(openDialogOptions)
+        .then(async (uri: vscode.Uri[] | undefined) => {
+          if (uri && uri.length > 0) {
+            const webview = NextWebviewPanel.getInstance({
+              extensionUri: context.extensionUri,
+              route: 'view2',
+              title: 'GitHub Next Webview 2',
+              viewId: 'ghnextB',
+            })
+          } else {
+            vscode.window.showErrorMessage('No valid file selected!')
+            return
+          }
+        })
     })
   )
 
