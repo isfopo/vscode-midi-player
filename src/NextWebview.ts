@@ -1,6 +1,7 @@
 import * as vscode from 'vscode'
 import * as fs from 'fs'
 import { nanoid } from 'nanoid'
+import { Midi } from '@tonejs/midi'
 
 type NextWebviewOptions = {
   extensionUri: vscode.Uri
@@ -11,7 +12,6 @@ type NextWebviewOptions = {
   scriptUri?: vscode.Uri
   styleUri?: vscode.Uri
   nonce?: string
-  handleMessage?: (message: any) => any
 }
 
 abstract class NextWebview {
@@ -46,8 +46,8 @@ abstract class NextWebview {
     }
   }
 
-  protected handleMessage(message: any): void {
-    this._opts.handleMessage(message)
+  protected getData(): Midi {
+    return new Midi(fs.readFileSync(this._opts.fileUri.fsPath))
   }
 
   protected _getContent(webview: vscode.Webview) {
@@ -77,7 +77,6 @@ abstract class NextWebview {
 				<link href="${styleUri}" rel="stylesheet" />
         <script nonce="${this._opts.nonce}">
           window.acquireVsCodeApi = acquireVsCodeApi;
-          window.initialData = new Midi(fs.readFileSync(this._opts.fileUri.fsPath))
         </script>
 
 				<title>Next Webview</title>
@@ -161,6 +160,11 @@ export class NextWebviewPanel extends NextWebview implements vscode.Disposable {
     )
   }
 
+  handleMessage(message: string) {
+    console.log(message)
+    this.panel.webview.postMessage(this.getData())
+  }
+
   // Panel updates may also update the panel title
   // in addition to the webview content.
   public update() {
@@ -212,6 +216,10 @@ export class NextWebviewSidebar
     this.update()
     // Handle messages from the webview
     this._webview.webview.onDidReceiveMessage(this.handleMessage, this)
+  }
+
+  handleMessage(message: string) {
+    console.log(message)
   }
 
   // WebviewView updates are just "write the html to the view"

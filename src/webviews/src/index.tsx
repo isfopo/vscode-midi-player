@@ -10,6 +10,7 @@ import {
   useLocation,
   useNavigate,
 } from 'react-router-dom'
+import VSCodeAPI from './lib/VSCodeAPI'
 
 // TODO: Type the incoming config data
 let config: any = {}
@@ -37,6 +38,13 @@ function AppRoutes() {
     if (rootEl) {
       navigate(`/${rootEl.dataset.route}`, { replace: true })
     }
+  }, [])
+
+  useEffect(() => {
+    VSCodeAPI.postMessage('hi from react')
+    VSCodeAPI.onMessage(message => {
+      console.log(message.data)
+    })
   }, [])
 
   return (
