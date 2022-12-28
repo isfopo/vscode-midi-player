@@ -59,8 +59,8 @@ abstract class NextWebview {
     // which is at least a little scary, but otherwise we can't stick
     // SVGs in CSS as background images via data URLs, which is hella useful.
     return /* html */ `
-			<!DOCTYPE html>
-			<html lang="en">
+		<!DOCTYPE html>
+		<html lang="en">
 			<head>
 				<meta charset="UTF-8">
 
@@ -83,7 +83,7 @@ abstract class NextWebview {
 				<div id="root" data-route="${this._opts.route}"></div>			
 				<script nonce="${this._opts.nonce}" src="${scriptUri}"></script>
 			</body>
-			</html>`
+		</html>`
   }
 
   public abstract update(): void
