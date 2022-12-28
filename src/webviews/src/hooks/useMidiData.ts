@@ -15,7 +15,7 @@ export const useMidiData = () => {
     })
 
     VSCodeAPI.postMessage({
-      type: 'request',
+      type: 'fetch',
     })
   }, [])
 
