@@ -1,17 +1,23 @@
-import React, { FunctionComponent } from 'react'
-import { VscFlame } from 'react-icons/vsc'
-import { Link } from 'react-router-dom'
-import Input from '../components/Input'
-import Toggle from '../components/Toggle'
-import useVSCodeState from '../hooks/useVSCodeState'
-import VSCodeAPI from '../VSCodeAPI'
+import { Midi } from '@tonejs/midi'
+import React from 'react'
 
-export interface MainViewProps {}
+export interface MainViewProps {
+  midi: Midi | undefined
+}
 
-export const MainView: FunctionComponent<MainViewProps> = props => {
+export const MainView: React.FC<MainViewProps> = ({ midi }) => {
+  if (!midi) {
+    return <p>loading</p>
+  }
+
+  console.log(midi)
+
   return (
     <div>
-      <p>Hello</p>
+      <h1>{midi.name}</h1>
+      {midi.tracks.map(track => (
+        <p>{track.instrument.name}</p>
+      ))}
     </div>
   )
 }
