@@ -1,4 +1,5 @@
 import { Midi } from '@tonejs/midi'
+import { IMessage } from '../../shared/types'
 
 declare const acquireVsCodeApi: Function
 
@@ -15,7 +16,7 @@ class VSCodeWrapper {
    * Send a message to the extension framework.
    * @param message
    */
-  public postMessage(message: any): void {
+  public postMessage(message: IMessage): void {
     this.vscodeApi.postMessage(message)
   }
 
