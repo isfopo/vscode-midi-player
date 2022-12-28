@@ -40,17 +40,17 @@ export function activate(context: vscode.ExtensionContext) {
 
       vscode.window
         .showOpenDialog(openDialogOptions)
-        .then(async (uri: vscode.Uri[] | undefined) => {
-          if (uri && uri.length > 0) {
-            const webview = NextWebviewPanel.getInstance({
-              extensionUri: context.extensionUri,
-              route: 'view2',
-              title: 'GitHub Next Webview 2',
-              viewId: 'ghnextB',
-            })
-          } else {
-            vscode.window.showErrorMessage('No valid file selected!')
-            return
+        .then(async (URIs: vscode.Uri[] | undefined) => {
+          if (URIs && URIs.length > 0) {
+            for (const uri of URIs) {
+              const webview = NextWebviewPanel.getInstance({
+                extensionUri: context.extensionUri,
+                fileUri: uri,
+                route: 'view2',
+                title: 'GitHub Next Webview 2',
+                viewId: 'ghnextB',
+              })
+            }
           }
         })
     })

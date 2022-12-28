@@ -1,8 +1,10 @@
 import * as vscode from 'vscode'
+import * as fs from 'fs'
 import { nanoid } from 'nanoid'
 
 type NextWebviewOptions = {
   extensionUri: vscode.Uri
+  fileUri: vscode.Uri
   route: string
   title: string
   viewId: string
@@ -36,11 +38,11 @@ abstract class NextWebview {
 
   protected getWebviewOptions(): vscode.WebviewOptions {
     return {
-      // Enable javascript in the webview
       enableScripts: true,
-
-      // And restrict the webview to only loading content from our extension's `out` directory.
-      localResourceRoots: [vscode.Uri.joinPath(this._opts.extensionUri, 'out')],
+      localResourceRoots: [
+        vscode.Uri.joinPath(this._opts.extensionUri, 'out'),
+        this._opts.fileUri,
+      ],
     }
   }
 
@@ -75,6 +77,7 @@ abstract class NextWebview {
 				<link href="${styleUri}" rel="stylesheet" />
         <script nonce="${this._opts.nonce}">
           window.acquireVsCodeApi = acquireVsCodeApi;
+          window.initialData = new Midi(fs.readFileSync(this._opts.fileUri.fsPath))
         </script>
 
 				<title>Next Webview</title>
@@ -212,7 +215,7 @@ export class NextWebviewSidebar
   }
 
   // WebviewView updates are just "write the html to the view"
-  update(): void {
+  update() {
     if (this._webview) {
       this._webview.webview.html = this._getContent(this._webview.webview)
     }
