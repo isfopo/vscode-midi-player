@@ -51,15 +51,6 @@ abstract class NextWebview {
   }
 
   protected _getContent(webview: vscode.Webview) {
-    // Prepare webview URIs
-    const scriptUri = webview.asWebviewUri(this._opts.scriptUri)
-    const styleUri = webview.asWebviewUri(this._opts.styleUri)
-
-    // Return the HTML with all the relevant content embedded
-    // Also sets a Content-Security-Policy that permits all the sources
-    // we specified. Note that img-src allows `self` and `data:`,
-    // which is at least a little scary, but otherwise we can't stick
-    // SVGs in CSS as background images via data URLs, which is hella useful.
     return /* html */ `
 		<!DOCTYPE html>
 		<html lang="en">
@@ -70,11 +61,15 @@ abstract class NextWebview {
 				Use a content security policy to only allow loading images from https or from our extension directory,
 				and only allow scripts that have a specific nonce.
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${webview.cspSource} 'self' data:; style-src ${webview.cspSource}; script-src 'nonce-${this._opts.nonce}';">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${
+          webview.cspSource
+        } 'self' data:; style-src ${webview.cspSource}; script-src 'nonce-${
+      this._opts.nonce
+    }';">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         
-				<link href="${styleUri}" rel="stylesheet" />
+				<link href="${webview.asWebviewUri(this._opts.styleUri)}" rel="stylesheet" />
         <script nonce="${this._opts.nonce}">
           window.acquireVsCodeApi = acquireVsCodeApi;
         </script>
@@ -83,7 +78,9 @@ abstract class NextWebview {
 			</head>
 			<body>
 				<div id="root" data-route="${this._opts.route}"></div>			
-				<script nonce="${this._opts.nonce}" src="${scriptUri}"></script>
+				<script nonce="${this._opts.nonce}" src="${webview.asWebviewUri(
+      this._opts.scriptUri
+    )}"></script>
 			</body>
 		</html>`
   }
@@ -142,16 +139,16 @@ export class NextWebviewPanel extends NextWebview implements vscode.Disposable {
     this.panel.onDidDispose(() => this.dispose(), null, this._disposables)
 
     // Update the content based on view changes
-    // this.panel.onDidChangeViewState(
-    //   e => {
-    //     console.debug('View state changed! ', this._opts.viewId,)
-    //     if (this.panel.visible) {
-    //       this.update()
-    //     }
-    //   },
-    //   null,
-    //   this._disposables
-    // )
+    this.panel.onDidChangeViewState(
+      e => {
+        console.debug('View state changed! ', this._opts.viewId)
+        if (this.panel.visible) {
+          this.update()
+        }
+      },
+      null,
+      this._disposables
+    )
 
     this.panel.webview.onDidReceiveMessage(
       this.handleMessage,
@@ -189,14 +186,6 @@ export class NextWebviewPanel extends NextWebview implements vscode.Disposable {
     }
   }
 }
-
-// export class NextWebviewPanelSerializer implements vscode.WebviewPanelSerializer {
-//   deserializeWebviewPanel(webviewPanel: vscode.WebviewPanel, state: unknown): Thenable<void> {
-//     console.log('deserialized state: ', state)
-//     webviewPanel
-//   }
-
-// }
 
 export class NextWebviewSidebar
   extends NextWebview
