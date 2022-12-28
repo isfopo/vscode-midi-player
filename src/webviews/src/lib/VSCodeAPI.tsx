@@ -1,3 +1,5 @@
+import { Midi } from '@tonejs/midi'
+
 declare const acquireVsCodeApi: Function
 
 interface VSCodeApi {
@@ -22,7 +24,9 @@ class VSCodeWrapper {
    * @param callback called when the extension sends a message
    * @returns function to clean up the message eventListener.
    */
-  public onMessage(callback: (message: any) => void): () => void {
+  public onMessage(
+    callback: (message: MessageEvent<Midi>) => void
+  ): () => void {
     window.addEventListener('message', callback)
     return () => window.removeEventListener('message', callback)
   }
