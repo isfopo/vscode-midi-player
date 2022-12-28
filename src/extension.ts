@@ -8,7 +8,7 @@ export function activate(context: vscode.ExtensionContext) {
       let openDialogOptions: vscode.OpenDialogOptions = {
         canSelectFiles: true,
         canSelectFolders: false,
-        canSelectMany: false,
+        canSelectMany: true,
         filters: {
           MIDI: ['mid', 'midi'],
         },
@@ -24,7 +24,7 @@ export function activate(context: vscode.ExtensionContext) {
                 fileUri: uri,
                 route: 'view1',
                 title: getFilename(uri),
-                viewId: 'ghnextB',
+                viewId: uri.path,
               })
             }
           }
