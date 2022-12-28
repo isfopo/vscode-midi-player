@@ -1,8 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './vscode.css'
 import { MemoryRouter as Router } from 'react-router-dom'
-import VSCodeAPI from './VSCodeAPI'
 import { AppRoutes } from './AppRoutes'
 
 let workspace = ''
