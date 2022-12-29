@@ -1,12 +1,6 @@
 import React from 'react'
 import { useEffect } from 'react'
-import {
-  MemoryRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-  useNavigate,
-} from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import { useMidiData } from './hooks/useMidiData'
 import { MainView } from './views/MainView'
 import { VSCodeProgressRing as ProgressRing } from '@vscode/webview-ui-toolkit/react'
@@ -14,7 +8,6 @@ import { VSCodeProgressRing as ProgressRing } from '@vscode/webview-ui-toolkit/r
 const rootEl = document.getElementById('root')
 
 export const AppRoutes = () => {
-  const location = useLocation()
   const navigate = useNavigate()
   const midi = useMidiData()
 
