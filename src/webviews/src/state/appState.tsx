@@ -1,6 +1,5 @@
 import { Midi } from '@tonejs/midi'
 import createVSCodeZustand from './zustandState'
-import VSCodeAPI from '../VSCodeAPI'
 
 type AppState = {
   midi: Midi | undefined
