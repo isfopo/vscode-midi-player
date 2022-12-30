@@ -1,6 +1,5 @@
 import { Midi } from '@tonejs/midi'
 import React from 'react'
-import { usePlayback } from '../hooks/usePlayback'
 import { VSCodeButton as Button } from '@vscode/webview-ui-toolkit/react'
 import { useTransport } from '../hooks/useTransport'
 
