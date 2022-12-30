@@ -12,7 +12,7 @@ export const MainView: React.FC<MainViewProps> = ({ midi }) => {
 
   return (
     <div>
-      <Button onClick={play}>Play</Button>
+      <Button onClick={() => play('4:0:0')}>Play</Button>
       <Button onClick={stop}>Stop</Button>
       <h1>{midi.name}</h1>
       {midi.tracks.map(track => (

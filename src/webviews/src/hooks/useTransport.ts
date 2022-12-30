@@ -48,18 +48,18 @@ export const useTransport = (midi: Midi) => {
     }
   }, [midi])
 
-  const play: React.MouseEventHandler = useCallback(() => {
+  const play = useCallback((startPoint: Tone.Unit.Time = '0:0:0') => {
     if (!isSetup.current) {
       setup()
       isSetup.current = true
     }
 
     if (Tone.Transport.state === 'stopped') {
-      Tone.Transport.start()
+      Tone.Transport.start('+0', startPoint)
     }
   }, [])
 
-  const stop: React.MouseEventHandler = useCallback(() => {
+  const stop = useCallback(() => {
     if (Tone.Transport.state === 'started') {
       Tone.Transport.stop()
     }
