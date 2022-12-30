@@ -20,7 +20,7 @@ export const usePlayback = (midi: Midi) => {
     const synths: Tone.PolySynth<Tone.Synth<Tone.SynthOptions>>[] = []
 
     if (isPlaying) {
-      const now = Tone.now() + 0.5
+      const now = Tone.now()
       midi.tracks.forEach(track => {
         //create a synth for each track
         const synth = new Tone.PolySynth().toDestination()
