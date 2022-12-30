@@ -1,12 +1,14 @@
 import { Midi } from '@tonejs/midi'
+import { useRef } from 'react'
 import { useCallback } from 'react'
 import { useEffect } from 'react'
 import * as Tone from 'tone'
 
 export const useTransport = (midi: Midi) => {
+  const isSetup = useRef<boolean>(false)
+
   const setup = useCallback(() => {
     Tone.Transport.PPQ = midi.header.ppq
-    const numofVoices = midi.tracks.length
     const synths: Tone.PolySynth<Tone.Synth<Tone.SynthOptions>>[] = []
 
     //************** Tell Transport about Time Signature changes  ********************
@@ -19,7 +21,7 @@ export const useTransport = (midi: Midi) => {
 
     //************** Tell Transport about bpm changes  ********************
     for (let i = 0; i < midi.header.tempos.length; i++) {
-      Tone.Transport.schedule(function (time) {
+      Tone.Transport.schedule(time => {
         Tone.Transport.bpm.value = midi.header.tempos[i].bpm
       }, midi.header.tempos[i].ticks + 'i')
     }
@@ -32,10 +34,10 @@ export const useTransport = (midi: Midi) => {
     // }
 
     //************** Create Synths and Parts, one for each track  ********************
-    for (let i = 0; i < numofVoices; i++) {
+    for (let i = 0; i < midi.tracks.length; i++) {
       synths[i] = new Tone.PolySynth().toDestination()
 
-      var part = new Tone.Part(function (time, value) {
+      var part = new Tone.Part((time, value) => {
         synths[i].triggerAttackRelease(
           value.name,
           value.duration,
@@ -47,6 +49,11 @@ export const useTransport = (midi: Midi) => {
   }, [midi])
 
   const play: React.MouseEventHandler = useCallback(() => {
+    if (!isSetup.current) {
+      setup()
+      isSetup.current = true
+    }
+
     if (Tone.Transport.state === 'stopped') {
       Tone.Transport.start()
     }
@@ -58,5 +65,5 @@ export const useTransport = (midi: Midi) => {
     }
   }, [])
 
-  return { setup, play, stop }
+  return { play, stop }
 }

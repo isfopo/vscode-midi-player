@@ -9,11 +9,10 @@ export interface MainViewProps {
 }
 
 export const MainView: React.FC<MainViewProps> = ({ midi }) => {
-  const { play, stop, setup } = useTransport(midi)
+  const { play, stop } = useTransport(midi)
 
   return (
     <div>
-      <Button onClick={setup}>setup</Button>
       <Button onClick={play}>Play</Button>
       <Button onClick={stop}>Stop</Button>
       <h1>{midi.name}</h1>
