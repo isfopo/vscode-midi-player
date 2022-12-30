@@ -1,7 +1,6 @@
 import { Midi } from '@tonejs/midi'
 import { useRef } from 'react'
 import { useCallback } from 'react'
-import { useEffect } from 'react'
 import * as Tone from 'tone'
 
 export const useTransport = (midi: Midi) => {
