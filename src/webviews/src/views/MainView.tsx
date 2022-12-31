@@ -8,12 +8,13 @@ export interface MainViewProps {
 }
 
 export const MainView: React.FC<MainViewProps> = ({ midi }) => {
-  const { play, stop, position } = useTransport(midi)
+  const { play, stop, pause, position } = useTransport(midi)
 
   return (
     <div>
-      <Button onClick={() => play('4:0:0')}>Play</Button>
+      <Button onClick={() => play()}>Play</Button>
       <Button onClick={stop}>Stop</Button>
+      <Button onClick={pause}>Pause</Button>
       <p>{position.toString()}</p>
       <h1>{midi.name}</h1>
       {midi.tracks.map(track => (

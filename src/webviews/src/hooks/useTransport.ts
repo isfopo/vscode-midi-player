@@ -50,28 +50,39 @@ export const useTransport = (midi: Midi) => {
     }
   }, [midi])
 
-  const play = useCallback((startPoint: Tone.Unit.Time = '0:0:0') => {
-    if (!isSetup.current) {
-      setup()
-      isSetup.current = true
-    }
+  const play = useCallback(
+    (startPoint: Tone.Unit.Time = position) => {
+      if (!isSetup.current) {
+        setup()
+        isSetup.current = true
+      }
 
-    if (Tone.Transport.state === 'stopped') {
-      Tone.Transport.start('+0', startPoint)
-      positionInterval.current = setInterval(() => {
-        setPosition(Tone.Transport.position)
-      }, Tone.Transport.blockTime)
-    }
-  }, [])
+      if (Tone.Transport.state !== 'started') {
+        Tone.Transport.start('+0', startPoint)
+        positionInterval.current = setInterval(() => {
+          setPosition(Tone.Transport.position)
+        }, Tone.Transport.blockTime)
+      }
+    },
+    [position]
+  )
 
   // pause on click, stop on double click
 
-  const stop = useCallback(() => {
-    if (Tone.Transport.state === 'started') {
-      Tone.Transport.stop()
+  const pause = useCallback(() => {
+    if (Tone.Transport.state !== 'paused') {
+      Tone.Transport.pause()
       clearInterval(positionInterval.current)
     }
   }, [])
 
-  return { play, stop, position }
+  const stop = useCallback(() => {
+    if (Tone.Transport.state !== 'stopped') {
+      Tone.Transport.stop()
+      setPosition('0:0:0')
+      clearInterval(positionInterval.current)
+    }
+  }, [])
+
+  return { play, stop, pause, position }
 }
