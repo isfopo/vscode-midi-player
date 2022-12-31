@@ -58,7 +58,7 @@ export const useTransport = (midi: Midi) => {
       Tone.Transport.start('+0', startPoint)
       setInterval(() => {
         setPosition(Tone.Transport.position)
-      }, 100)
+      }, Tone.Transport.blockTime)
     }
   }, [])
 
