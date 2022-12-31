@@ -1,4 +1,5 @@
 import { Midi } from '@tonejs/midi'
+import { useState } from 'react'
 import { useRef } from 'react'
 import { useCallback } from 'react'
 import * as Tone from 'tone'
@@ -55,8 +56,13 @@ export const useTransport = (midi: Midi) => {
 
     if (Tone.Transport.state === 'stopped') {
       Tone.Transport.start('+0', startPoint)
+      setInterval(() => {
+        setPosition(Tone.Transport.position)
+      }, 100)
     }
   }, [])
+
+  // pause on click, stop on double click
 
   const stop = useCallback(() => {
     if (Tone.Transport.state === 'started') {
@@ -64,5 +70,7 @@ export const useTransport = (midi: Midi) => {
     }
   }, [])
 
-  return { play, stop }
+  const [position, setPosition] = useState<Tone.Unit.Time>('0:0:0')
+
+  return { play, stop, position }
 }
