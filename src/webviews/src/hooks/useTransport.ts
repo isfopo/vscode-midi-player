@@ -6,6 +6,8 @@ import * as Tone from 'tone'
 
 export const useTransport = (midi: Midi) => {
   const isSetup = useRef<boolean>(false)
+  const [position, setPosition] = useState<Tone.Unit.Time>('0:0:0')
+  const positionInterval = useRef<NodeJS.Timer>()
 
   const setup = useCallback(() => {
     Tone.Transport.PPQ = midi.header.ppq
@@ -56,7 +58,7 @@ export const useTransport = (midi: Midi) => {
 
     if (Tone.Transport.state === 'stopped') {
       Tone.Transport.start('+0', startPoint)
-      setInterval(() => {
+      positionInterval.current = setInterval(() => {
         setPosition(Tone.Transport.position)
       }, Tone.Transport.blockTime)
     }
@@ -67,10 +69,9 @@ export const useTransport = (midi: Midi) => {
   const stop = useCallback(() => {
     if (Tone.Transport.state === 'started') {
       Tone.Transport.stop()
+      clearInterval(positionInterval.current)
     }
   }, [])
-
-  const [position, setPosition] = useState<Tone.Unit.Time>('0:0:0')
 
   return { play, stop, position }
 }
