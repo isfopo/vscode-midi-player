@@ -1,7 +1,7 @@
-import { Midi } from '@tonejs/midi'
 import React from 'react'
-import { VSCodeButton as Button } from '@vscode/webview-ui-toolkit/react'
+import { Midi } from '@tonejs/midi'
 import { useTransport } from '../hooks/useTransport'
+import { ButtonBase } from '../components/buttons/ButtonBase'
 
 export interface MainViewProps {
   midi: Midi
@@ -12,9 +12,7 @@ export const MainView: React.FC<MainViewProps> = ({ midi }) => {
 
   return (
     <div>
-      <Button onClick={() => play()}>Play</Button>
-      <Button onClick={stop}>Stop</Button>
-      <Button onClick={pause}>Pause</Button>
+      <ButtonBase icon={<p>hi</p>} onClick={() => play()} />
       <p>{position.toString()}</p>
       <h1>{midi.name}</h1>
       {midi.tracks.map(track => (

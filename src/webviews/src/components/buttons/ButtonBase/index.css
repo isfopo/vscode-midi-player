@@ -1,0 +1,11 @@
+.container {
+  background-color: var(--vscode-button-background);
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  box-shadow: 1rem 1rem 0.5rem var(--vscode-widget-shadow);
+}
+
+.icon {
+  background-color: var(--vscode-button-foreground);
+}
