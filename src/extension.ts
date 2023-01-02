@@ -5,7 +5,7 @@ import { NextWebviewPanel } from './NextWebview'
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.commands.registerCommand('Midi.open', () => {
-      let openDialogOptions: vscode.OpenDialogOptions = {
+      const openDialogOptions: vscode.OpenDialogOptions = {
         canSelectFiles: true,
         canSelectFolders: false,
         canSelectMany: true,
@@ -19,7 +19,7 @@ export function activate(context: vscode.ExtensionContext) {
         .then(async (URIs: vscode.Uri[] | undefined) => {
           if (URIs && URIs.length > 0) {
             for (const uri of URIs) {
-              const webview = NextWebviewPanel.getInstance({
+              NextWebviewPanel.getInstance({
                 extensionUri: context.extensionUri,
                 fileUri: uri,
                 route: 'view1',
