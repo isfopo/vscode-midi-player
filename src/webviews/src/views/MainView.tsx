@@ -1,7 +1,6 @@
 import React from 'react'
 import { Midi } from '@tonejs/midi'
 import { useTransport } from '../hooks/useTransport'
-import { ButtonBase } from '../components/buttons/ButtonBase'
 import { PlayButton } from '../components/buttons/PlayButton'
 
 export interface MainViewProps {
