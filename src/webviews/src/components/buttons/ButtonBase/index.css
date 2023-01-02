@@ -5,8 +5,15 @@
   border-radius: 50%;
   box-shadow: 0 4px 8px 0 var(--vscode-widget-shadow),
     0 6px 20px 0 var(--vscode-widget-shadow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.icon {
-  background-color: var(--vscode-button-foreground);
+.container:hover {
+  background-color: var(--vscode-button-hoverBackground);
+}
+
+.container > span {
+  color: var(--vscode-button-foreground);
 }
