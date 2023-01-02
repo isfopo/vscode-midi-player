@@ -6,6 +6,6 @@ export interface StopButtonProps {
   stop: () => void
 }
 
-export const StopButton: React.FC<StopButtonProps> = () => {
+export const StopButton: React.FC<StopButtonProps> = ({ stop }) => {
   return <ButtonBase icon={<Stop />} onClick={() => stop()} />
 }

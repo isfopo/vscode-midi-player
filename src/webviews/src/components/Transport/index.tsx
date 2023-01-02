@@ -14,8 +14,11 @@ export const Transport: React.FC<TransportProps> = ({ midi }) => {
 
   return (
     <div className={styles['container']}>
-      <PlayButton play={play} />
-      <StopButton stop={stop} />
+      <p>{Math.floor(midi.header.tempos[0].bpm)}</p>
+      <span>
+        <PlayButton play={play} />
+        <StopButton stop={stop} />
+      </span>
       <p>{position.toString()}</p>
     </div>
   )
