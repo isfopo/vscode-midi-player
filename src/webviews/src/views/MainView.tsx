@@ -13,7 +13,7 @@ export const MainView: React.FC<MainViewProps> = ({ midi }) => {
   return (
     <div>
       <ButtonBase icon={<p>hi</p>} onClick={() => play()} />
-      <p>{position.toString()}</p>
+      <p className="container">{position.toString()}</p>
       <h1>{midi.name}</h1>
       {midi.tracks.map(track => (
         <p>{track.instrument.name}</p>

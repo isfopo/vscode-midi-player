@@ -1,5 +1,5 @@
 import React from 'react'
-import './index.css'
+import styles from './styles.module.css'
 
 export interface ButtonBaseProps {
   icon: any
@@ -8,7 +8,7 @@ export interface ButtonBaseProps {
 
 export const ButtonBase: React.FC<ButtonBaseProps> = ({ icon, onClick }) => {
   return (
-    <div className="container" onClick={onClick}>
+    <div className={styles['container']} onClick={onClick}>
       <span>{icon}</span>
     </div>
   )
