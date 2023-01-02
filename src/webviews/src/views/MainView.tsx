@@ -2,6 +2,7 @@ import React from 'react'
 import { Midi } from '@tonejs/midi'
 import { useTransport } from '../hooks/useTransport'
 import { PlayButton } from '../components/buttons/PlayButton'
+import { StopButton } from '../components/buttons/StopButton'
 
 export interface MainViewProps {
   midi: Midi
@@ -13,7 +14,8 @@ export const MainView: React.FC<MainViewProps> = ({ midi }) => {
   return (
     <div>
       <PlayButton play={play} />
-      <p className="container">{position.toString()}</p>
+      <StopButton stop={stop} />
+      <h2 className="container">{position.toString()}</h2>
       <h1>{midi.name}</h1>
       {midi.tracks.map(track => (
         <p>{track.instrument.name}</p>
