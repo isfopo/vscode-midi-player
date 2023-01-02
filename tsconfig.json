@@ -9,5 +9,6 @@
     "rootDir": "src",
     "forceConsistentCasingInFileNames": true
   },
+  "include": ["src/global.d.ts"],
   "exclude": ["node_modules", ".vscode-test", "src/webviews"]
 }
