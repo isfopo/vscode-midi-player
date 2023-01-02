@@ -5,7 +5,6 @@ const path = require('path')
  * @type {import('vite').UserConfig}
  */
 export default defineConfig({
-  root: 'src/webviews',
   publicDir: 'src/webviews/public',
   build: {
     outDir: 'out/webviews',
