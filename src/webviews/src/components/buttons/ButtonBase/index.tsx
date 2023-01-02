@@ -8,8 +8,8 @@ export interface ButtonBaseProps {
 
 export const ButtonBase: React.FC<ButtonBaseProps> = ({ icon, onClick }) => {
   return (
-    <div className="container">
-      <span className="icon">{icon}</span>
+    <div className="container" onClick={onClick}>
+      <span>{icon}</span>
     </div>
   )
 }
