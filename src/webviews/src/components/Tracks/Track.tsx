@@ -9,7 +9,7 @@ export interface TrackProps {
 export const Track: React.FC<TrackProps> = ({ index, track }) => {
   return (
     <span>
-      <p>{index}</p>
+      <p>{index + 1}</p>
       <p>{track.instrument.name}</p>
     </span>
   )
