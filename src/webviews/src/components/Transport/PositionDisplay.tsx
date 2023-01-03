@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import { Time } from 'tone/build/esm/core/type/Units'
-import { ForegroundBox } from '../Boxes/ForegroundBox'
+import { parsePosition } from '../../helpers/position'
+import { ForegroundBox } from '../boxes/ForegroundBox'
 
 export interface PositionDisplayProps {
   position: Time
@@ -9,20 +10,9 @@ export interface PositionDisplayProps {
 export const PositionDisplay: React.FC<PositionDisplayProps> = ({
   position,
 }) => {
-  const divisions = useMemo<number[]>(
-    () =>
-      position
-        .toString()
-        .split(':')
-        .map(s => parseFloat(s)),
+  const { bars, beats, subdivisions } = useMemo(
+    () => parsePosition(position),
     [position]
-  )
-
-  const bars = useMemo<number>(() => divisions[0] + 1, [divisions])
-  const beats = useMemo<number>(() => divisions[1] + 1, [divisions])
-  const subdivisions = useMemo<number>(
-    () => Math.floor(divisions[2]) + 1,
-    [divisions]
   )
 
   return (
