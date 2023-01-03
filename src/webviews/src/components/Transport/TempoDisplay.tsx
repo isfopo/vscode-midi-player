@@ -1,6 +1,6 @@
 import React from 'react'
 import { TempoEvent } from '@tonejs/midi/dist/Header'
-import { ForegroundBox } from '../Boxes/ForegroundBox'
+import { ForegroundBox } from '../boxes/ForegroundBox'
 
 export interface TempoDisplayProps {
   tempos: TempoEvent[]
