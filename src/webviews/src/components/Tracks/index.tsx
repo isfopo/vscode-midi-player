@@ -1,6 +1,7 @@
 import React from 'react'
 import { Track as ITrack } from '@tonejs/midi'
 import { Track } from './Track'
+import styles from './index.module.css'
 
 export interface TracksProps {
   tracks: ITrack[]
@@ -8,9 +9,9 @@ export interface TracksProps {
 
 export const Tracks: React.FC<TracksProps> = ({ tracks }) => {
   return (
-    <div>
-      {tracks.map(track => (
-        <Track track={track} />
+    <div className={styles['container']}>
+      {tracks.map((track, index) => (
+        <Track index={index} track={track} />
       ))}
     </div>
   )
