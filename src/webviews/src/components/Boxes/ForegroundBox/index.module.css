@@ -1,0 +1,6 @@
+.container {
+  color: var(--vscode-banner-foreground);
+  background-color: var(--vscode-banner-background);
+  border: 1px var(--vscode-banner-foreground) solid;
+  padding: 0.5rem;
+}

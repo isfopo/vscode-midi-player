@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import { Time } from 'tone/build/esm/core/type/Units'
+import { ForegroundBox } from '../Boxes/ForegroundBox'
 
 export interface PositionDisplayProps {
   position: Time
@@ -25,8 +26,8 @@ export const PositionDisplay: React.FC<PositionDisplayProps> = ({
   )
 
   return (
-    <span>
+    <ForegroundBox>
       <p>{bars}</p>-<p>{beats}</p>-<p>{subdivisions}</p>
-    </span>
+    </ForegroundBox>
   )
 }
