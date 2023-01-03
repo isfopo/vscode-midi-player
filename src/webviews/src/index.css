@@ -1,3 +1,8 @@
 body {
   font-family: var(--vscode-editor-font-family);
 }
+
+p {
+  cursor: default;
+  user-select: none;
+}
