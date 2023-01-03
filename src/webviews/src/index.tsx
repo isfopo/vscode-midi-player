@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { MemoryRouter as Router } from 'react-router-dom'
 import { AppRoutes } from './AppRoutes'
 import { IconContext } from 'react-icons'
+import './index.css'
 
 const root = document.getElementById('root')
 
