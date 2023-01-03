@@ -27,7 +27,9 @@ export const PositionDisplay: React.FC<PositionDisplayProps> = ({
 
   return (
     <ForegroundBox>
-      <p>{bars}</p>-<p>{beats}</p>-<p>{subdivisions}</p>
+      <p>
+        {bars}.{beats}.{subdivisions}
+      </p>
     </ForegroundBox>
   )
 }
