@@ -10,7 +10,9 @@ export const Track: React.FC<TrackProps> = ({ index, track }) => {
   return (
     <span>
       <p>{index + 1}</p>
-      <p>{track.instrument.name}</p>
+      <span>
+        <p>{track.instrument.name}</p>
+      </span>
     </span>
   )
 }

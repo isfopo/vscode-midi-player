@@ -11,3 +11,8 @@
   flex-direction: row;
   gap: 0.5rem;
 }
+
+.container > span > p {
+  color: var(--vscode-activityBarItem-profilesForeground);
+  font-weight: 600;
+}
