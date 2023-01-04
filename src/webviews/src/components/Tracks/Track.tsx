@@ -7,11 +7,16 @@ export interface TrackProps {
 }
 
 export const Track: React.FC<TrackProps> = ({ index, track }) => {
+  const name = useMemo<string>(
+    () => (track.name !== '' ? track.name : track.instrument.name),
+    [track]
+  )
+
   return (
     <span>
       <p>{index + 1}</p>
       <span>
-        <p>{track.instrument.name}</p>
+        <p>{name}</p>
       </span>
     </span>
   )
