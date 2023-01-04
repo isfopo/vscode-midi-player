@@ -1,5 +1,6 @@
 import { Note as INote } from '@tonejs/midi/dist/Note'
 import React, { useMemo, useState } from 'react'
+import { Range } from '../classes/Range'
 import { Note } from './Note'
 
 export interface NotesProps {
@@ -9,6 +10,8 @@ export interface NotesProps {
 export const Notes: React.FC<NotesProps> = ({ notes }) => {
   const [width, setWidth] = useState<number>(128)
   const [height, setHeight] = useState<number>(12)
+  const range = useMemo<Range>(() => new Range(notes.map(n => n.midi)), [notes])
+
   return (
     <svg
       viewBox={`0 0 ${width} ${height}`}
