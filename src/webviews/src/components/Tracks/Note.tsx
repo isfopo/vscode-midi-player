@@ -6,14 +6,13 @@ export interface NoteProps {
 }
 
 export const Note: React.FC<NoteProps> = ({ note }) => {
+  console.log(note)
   return (
-    <circle
-      cx="12"
-      cy="12"
-      r="8"
-      stroke-width="4"
-      stroke="tomato"
-      fill="none"
+    <rect
+      x={note.ticks / 1000}
+      y={note.midi / 10}
+      width={note.durationTicks / 1000}
+      height=".5"
     />
   )
 }
