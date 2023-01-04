@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Track as ITrack } from '@tonejs/midi'
+import { Notes } from './Notes'
 
 export interface TrackProps {
   index: number
@@ -18,6 +19,7 @@ export const Track: React.FC<TrackProps> = ({ index, track }) => {
       <span>
         <p>{name}</p>
       </span>
+      <Notes notes={track.notes} />
     </span>
   )
 }
