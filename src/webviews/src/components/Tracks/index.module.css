@@ -13,7 +13,12 @@
   gap: 0.5rem;
 }
 
+.container > tr > * {
+  width: 12rem;
+}
+
 .container > tr > :first-child {
+  width: fit-content;
   color: var(--vscode-activityBarItem-profilesForeground);
   font-weight: 600;
 }
