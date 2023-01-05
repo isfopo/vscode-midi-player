@@ -14,6 +14,11 @@ export const Track: React.FC<TrackProps> = ({ index, track, duration }) => {
     [track]
   )
 
+  if (track.notes.length === 0) {
+    // TODO: have toggle to show hidden tracks
+    return <></>
+  }
+
   return (
     <tr>
       <td>
