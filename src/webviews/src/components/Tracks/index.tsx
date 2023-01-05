@@ -17,10 +17,10 @@ export const Tracks: React.FC<TracksProps> = ({ tracks }) => {
   }, [tracks])
 
   return (
-    <div className={styles['container']}>
+    <table className={styles['container']}>
       {tracks.map((track, index) => (
         <Track index={index} track={track} duration={duration} />
       ))}
-    </div>
+    </table>
   )
 }

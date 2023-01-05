@@ -15,12 +15,16 @@ export const Track: React.FC<TrackProps> = ({ index, track, duration }) => {
   )
 
   return (
-    <span>
-      <p>{index + 1}</p>
-      <span>
+    <tr>
+      <td>
+        <p>{index + 1}</p>
+      </td>
+      <td>
         <p>{name}</p>
-      </span>
-      <Notes notes={track.notes} duration={duration} />
-    </span>
+      </td>
+      <td>
+        <Notes notes={track.notes} duration={duration} />
+      </td>
+    </tr>
   )
 }
