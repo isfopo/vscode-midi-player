@@ -6,7 +6,6 @@ export interface NoteProps {
 }
 
 export const Note: React.FC<NoteProps> = ({ note }) => {
-  console.log(note)
   return (
     <rect
       x={note.ticks / 1000}

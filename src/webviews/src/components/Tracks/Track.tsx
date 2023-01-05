@@ -5,9 +5,10 @@ import { Notes } from './Notes'
 export interface TrackProps {
   index: number
   track: ITrack
+  duration: number
 }
 
-export const Track: React.FC<TrackProps> = ({ index, track }) => {
+export const Track: React.FC<TrackProps> = ({ index, track, duration }) => {
   const name = useMemo<string>(
     () => (track.name !== '' ? track.name : track.instrument.name),
     [track]
@@ -19,7 +20,7 @@ export const Track: React.FC<TrackProps> = ({ index, track }) => {
       <span>
         <p>{name}</p>
       </span>
-      <Notes notes={track.notes} />
+      <Notes notes={track.notes} duration={duration} />
     </span>
   )
 }
