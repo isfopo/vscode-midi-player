@@ -30,7 +30,7 @@ export const Note: React.FC<NoteProps> = ({
   }, [note.midi])
 
   const height = useMemo<number>(() => {
-    return 10 / range.distance
+    return boxHeight / range.distance
   }, [range])
 
   return <rect x={x} y={y} width={width} height={height} />
