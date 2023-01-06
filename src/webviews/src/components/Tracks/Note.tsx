@@ -22,7 +22,7 @@ export const Note: React.FC<NoteProps> = ({
   }, [note.midi])
 
   const y = useMemo<number>(() => {
-    return note.midi * -1 + range.max
+    return (-note.midi + range.max) * (boxHeight / range.distance)
   }, [note.midi])
 
   const width = useMemo<number>(() => {
