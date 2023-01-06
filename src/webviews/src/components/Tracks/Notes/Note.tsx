@@ -1,6 +1,6 @@
 import { Note as INote } from '@tonejs/midi/dist/Note'
 import React, { useMemo } from 'react'
-import { Range } from '../classes/Range'
+import { Range } from '../../classes/Range'
 
 export interface NoteProps {
   note: INote

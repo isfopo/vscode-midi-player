@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react'
 import { Note as INote } from '@tonejs/midi/dist/Note'
-import { Range } from '../classes/Range'
+import { Range } from '../../classes/Range'
 import { Note } from './Note'
+import { Grid } from './Grid'
 
 export interface NotesProps {
   notes: INote[]
@@ -18,6 +19,12 @@ export const Notes: React.FC<NotesProps> = ({ notes, duration }) => {
       viewBox={`0 0 ${width} ${height}`}
       xmlns="<http://www.w3.org/2000/svg>"
     >
+      <Grid
+        range={range}
+        duration={duration}
+        boxWidth={width}
+        boxHeight={height}
+      />
       {notes.map(note => (
         <Note
           note={note}
