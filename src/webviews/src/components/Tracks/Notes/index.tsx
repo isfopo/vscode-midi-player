@@ -24,6 +24,7 @@ export const Notes: React.FC<NotesProps> = ({ notes, duration }) => {
         duration={duration}
         boxWidth={width}
         boxHeight={height}
+        disabled
       />
       {notes.map(note => (
         <Note
