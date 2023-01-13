@@ -6,6 +6,7 @@ export interface TrackProps {
   index: number
   track: ITrack
   duration: number
+  isExpanded: boolean
   setExpandedTrack: React.Dispatch<React.SetStateAction<number>>
 }
 
@@ -13,6 +14,7 @@ export const Track: React.FC<TrackProps> = ({
   index,
   track,
   duration,
+  isExpanded,
   setExpandedTrack,
 }) => {
   const name = useMemo<string>(
@@ -38,7 +40,11 @@ export const Track: React.FC<TrackProps> = ({
         <p>{name}</p>
       </td>
       <td>
-        <Notes notes={track.notes} duration={duration} />
+        <Notes
+          notes={track.notes}
+          duration={duration}
+          isExpanded={isExpanded}
+        />
       </td>
     </tr>
   )

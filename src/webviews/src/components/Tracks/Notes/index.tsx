@@ -8,11 +8,16 @@ import { useStyleVariable } from '../../../hooks/useStyleVariable'
 export interface NotesProps {
   notes: INote[]
   duration: number
+  isExpanded: boolean
 }
 
-export const Notes: React.FC<NotesProps> = ({ notes, duration }) => {
+export const Notes: React.FC<NotesProps> = ({
+  notes,
+  duration,
+  isExpanded,
+}) => {
   const [width, setWidth] = useState<number>(128)
-  const [height, setHeight] = useState<number>(12)
+  const height = useMemo<number>(() => (isExpanded ? 24 : 12), [isExpanded])
   const range = useMemo<Range>(() => new Range(notes.map(n => n.midi)), [notes])
   const color = useStyleVariable(
     '--vscode-activityBarItem-profilesHoverForeground'

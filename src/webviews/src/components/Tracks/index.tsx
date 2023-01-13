@@ -29,6 +29,7 @@ export const Tracks: React.FC<TracksProps> = ({ tracks }) => {
           index={index}
           track={track}
           duration={duration}
+          isExpanded={index === expandedTrack}
           setExpandedTrack={setExpandedTrack}
         />
       ))}
