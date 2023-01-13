@@ -24,23 +24,23 @@ export const Note: React.FC<NoteProps> = ({
 }) => {
   const x = useMemo<number>(() => {
     return boxWidth * (note.ticks / duration)
-  }, [note.midi])
-
-  const y = useMemo<number>(() => {
-    return (-note.midi + range.max) * (boxHeight / range.distance)
-  }, [note.midi])
+  }, [note.ticks, boxWidth, duration])
 
   const width = useMemo<number>(() => {
     return boxWidth * (note.durationTicks / duration)
-  }, [note.midi])
+  }, [note.durationTicks, duration, boxWidth])
 
   const height = useMemo<number>(() => {
     return boxHeight / range.distance
-  }, [range])
+  }, [range, boxHeight])
+
+  const y = useMemo<number>(() => {
+    return (-note.midi + range.max) * (boxHeight / (range.distance + height))
+  }, [note.midi, range, boxHeight, height])
 
   const fill = useMemo<string>(() => {
     return darken(Math.abs(note.velocity * contrast - 1), color)
-  }, [color])
+  }, [color, contrast])
 
   return <rect x={x} y={y} width={width} height={height} fill={fill} />
 }
