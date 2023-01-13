@@ -14,7 +14,9 @@ export const Notes: React.FC<NotesProps> = ({ notes, duration }) => {
   const [width, setWidth] = useState<number>(128)
   const [height, setHeight] = useState<number>(12)
   const range = useMemo<Range>(() => new Range(notes.map(n => n.midi)), [notes])
-  const color = useStyleVariable('--vscode-banner-foreground')
+  const color = useStyleVariable(
+    '--vscode-activityBarItem-profilesHoverForeground'
+  )
 
   return (
     <svg
@@ -35,6 +37,7 @@ export const Notes: React.FC<NotesProps> = ({ notes, duration }) => {
           duration={duration}
           boxWidth={width}
           boxHeight={height}
+          color={color}
         />
       ))}
     </svg>

@@ -1,6 +1,9 @@
-import { Note as INote } from '@tonejs/midi/dist/Note'
 import React, { useMemo } from 'react'
+import { Note as INote } from '@tonejs/midi/dist/Note'
 import { Range } from '../../classes/Range'
+import { darken } from 'polished'
+
+const contrast = 1.5
 
 export interface NoteProps {
   note: INote
@@ -8,6 +11,7 @@ export interface NoteProps {
   duration: number
   boxWidth: number
   boxHeight: number
+  color: string
 }
 
 export const Note: React.FC<NoteProps> = ({
@@ -16,6 +20,7 @@ export const Note: React.FC<NoteProps> = ({
   duration,
   boxWidth,
   boxHeight,
+  color,
 }) => {
   const x = useMemo<number>(() => {
     return boxWidth * (note.ticks / duration)
@@ -33,5 +38,9 @@ export const Note: React.FC<NoteProps> = ({
     return boxHeight / range.distance
   }, [range])
 
-  return <rect x={x} y={y} width={width} height={height} />
+  const fill = useMemo<string>(() => {
+    return darken(Math.abs(note.velocity * contrast - 1), color)
+  }, [color])
+
+  return <rect x={x} y={y} width={width} height={height} fill={fill} />
 }
