@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Track as ITrack } from '@tonejs/midi'
 import { Track } from './Track'
 import styles from './index.module.css'
@@ -8,11 +8,19 @@ export interface TracksProps {
 }
 
 export const Tracks: React.FC<TracksProps> = ({ tracks }) => {
+  const duration = useMemo<number>(() => {
+    return Math.max(
+      ...tracks.map(track =>
+        Math.max(...track.notes.map(note => note.ticks + note.durationTicks))
+      )
+    )
+  }, [tracks])
+
   return (
-    <div className={styles['container']}>
+    <table className={styles['container']}>
       {tracks.map((track, index) => (
-        <Track index={index} track={track} />
+        <Track index={index} track={track} duration={duration} />
       ))}
-    </div>
+    </table>
   )
 }
