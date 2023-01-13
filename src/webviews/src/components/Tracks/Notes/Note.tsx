@@ -26,10 +26,6 @@ export const Note: React.FC<NoteProps> = ({
     return boxWidth * (note.ticks / duration)
   }, [note.midi])
 
-  const y = useMemo<number>(() => {
-    return (-note.midi + range.max) * (boxHeight / range.distance)
-  }, [note.midi])
-
   const width = useMemo<number>(() => {
     return boxWidth * (note.durationTicks / duration)
   }, [note.midi])
@@ -37,6 +33,10 @@ export const Note: React.FC<NoteProps> = ({
   const height = useMemo<number>(() => {
     return boxHeight / range.distance
   }, [range])
+
+  const y = useMemo<number>(() => {
+    return (-note.midi + range.max) * (boxHeight / (range.distance + height))
+  }, [note.midi])
 
   const fill = useMemo<string>(() => {
     return darken(Math.abs(note.velocity * contrast - 1), color)
