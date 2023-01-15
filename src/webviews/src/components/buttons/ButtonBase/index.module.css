@@ -17,3 +17,18 @@
 .container > span {
   color: var(--vscode-button-foreground);
 }
+
+.small {
+  width: 2rem;
+  height: 2rem;
+}
+
+.small svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.large {
+  width: 8rem;
+  height: 8rem;
+}
