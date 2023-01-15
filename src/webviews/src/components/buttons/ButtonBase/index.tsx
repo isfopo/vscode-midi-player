@@ -13,8 +13,11 @@ export const ButtonBase: React.FC<ButtonBaseProps> = ({
   size,
 }) => {
   return (
-    <div className={`${styles['container']} ${styles[size]}`} onClick={onClick}>
+    <span
+      className={`${styles['container']} ${styles[size]}`}
+      onClick={onClick}
+    >
       <span>{icon}</span>
-    </div>
+    </span>
   )
 }

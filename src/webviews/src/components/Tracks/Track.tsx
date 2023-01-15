@@ -8,6 +8,8 @@ export interface TrackProps {
   duration: number
   isExpanded: boolean
   setExpandedTrack: React.Dispatch<React.SetStateAction<number>>
+  zoom: number
+  offset: number
 }
 
 export const Track: React.FC<TrackProps> = ({
@@ -16,6 +18,8 @@ export const Track: React.FC<TrackProps> = ({
   duration,
   isExpanded,
   setExpandedTrack,
+  zoom,
+  offset,
 }) => {
   const name = useMemo<string>(
     () => (track.name !== '' ? track.name : track.instrument.name),
@@ -44,6 +48,8 @@ export const Track: React.FC<TrackProps> = ({
           notes={track.notes}
           duration={duration}
           isExpanded={isExpanded}
+          zoom={zoom}
+          offset={offset}
         />
       </td>
     </tr>

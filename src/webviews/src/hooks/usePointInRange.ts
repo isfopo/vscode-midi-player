@@ -19,7 +19,7 @@ export const usePointInRange = (
   }, [point, step, max])
 
   const decrease = useCallback(() => {
-    if (point - step < min) {
+    if (point - step >= min) {
       _setPoint(point - step)
     }
   }, [point, step, min])

@@ -9,12 +9,16 @@ export interface NotesProps {
   notes: INote[]
   duration: number
   isExpanded: boolean
+  zoom: number
+  offset: number
 }
 
 export const Notes: React.FC<NotesProps> = ({
   notes,
   duration,
   isExpanded,
+  zoom,
+  offset,
 }) => {
   const [width, setWidth] = useState<number>(128)
   const height = useMemo<number>(() => (isExpanded ? 24 : 12), [isExpanded])
@@ -43,6 +47,8 @@ export const Notes: React.FC<NotesProps> = ({
           boxWidth={width}
           boxHeight={height}
           color={color}
+          zoom={zoom}
+          offset={offset}
         />
       ))}
     </svg>

@@ -81,6 +81,8 @@ export const Tracks: React.FC<TracksProps> = ({ tracks }) => {
             duration={duration}
             isExpanded={index === expandedTrack}
             setExpandedTrack={setExpandedTrack}
+            zoom={zoom}
+            offset={offset}
           />
         ))}
       </tbody>

@@ -12,6 +12,8 @@ export interface NoteProps {
   boxWidth: number
   boxHeight: number
   color: string
+  zoom: number
+  offset: number
 }
 
 export const Note: React.FC<NoteProps> = ({
@@ -21,14 +23,16 @@ export const Note: React.FC<NoteProps> = ({
   boxWidth,
   boxHeight,
   color,
+  zoom,
+  offset,
 }) => {
   const x = useMemo<number>(() => {
-    return boxWidth * (note.ticks / duration)
-  }, [note.ticks, boxWidth, duration])
+    return boxWidth * (note.ticks / duration) * zoom
+  }, [note.ticks, boxWidth, duration, zoom])
 
   const width = useMemo<number>(() => {
-    return boxWidth * (note.durationTicks / duration)
-  }, [note.durationTicks, duration, boxWidth])
+    return boxWidth * (note.durationTicks / duration) * zoom
+  }, [note.durationTicks, duration, boxWidth, zoom])
 
   const height = useMemo<number>(() => {
     return boxHeight / range.distance
