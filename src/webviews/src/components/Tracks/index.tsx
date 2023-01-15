@@ -73,6 +73,17 @@ export const Tracks: React.FC<TracksProps> = ({ tracks }) => {
           </th>
         </tr>
       </thead>
+      <tbody>
+        {tracks.map((track, index) => (
+          <Track
+            index={index}
+            track={track}
+            duration={duration}
+            isExpanded={index === expandedTrack}
+            setExpandedTrack={setExpandedTrack}
+          />
+        ))}
+      </tbody>
     </table>
   )
 }
