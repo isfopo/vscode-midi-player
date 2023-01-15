@@ -10,6 +10,11 @@
   justify-content: space-between;
 }
 
+.container > thead > tr > th {
+  display: flex;
+  gap: 1rem;
+}
+
 .container > tbody > tr {
   background-color: var(--vscode-banner-background);
   padding: 0.5rem;
