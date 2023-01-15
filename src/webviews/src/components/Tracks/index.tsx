@@ -17,11 +17,20 @@ export interface TracksProps {
 
 export const Tracks: React.FC<TracksProps> = ({ tracks }) => {
   const [expandedTrack, setExpandedTrack] = useState<number>(-1)
+
+  const duration = useMemo<number>(() => {
+    return Math.max(
+      ...tracks.map(track =>
+        Math.max(...track.notes.map(note => note.ticks + note.durationTicks))
+      )
+    )
+  }, [tracks])
+
   const {
     point: offset,
     increase: increaseOffset,
     decrease: decreaseOffset,
-  } = usePointInRange(128)
+  } = usePointInRange(duration, { step: 5 })
 
   const {
     point: zoom,
@@ -32,14 +41,6 @@ export const Tracks: React.FC<TracksProps> = ({ tracks }) => {
   const onClick = useCallback((index: number) => {
     setExpandedTrack(index)
   }, [])
-
-  const duration = useMemo<number>(() => {
-    return Math.max(
-      ...tracks.map(track =>
-        Math.max(...track.notes.map(note => note.ticks + note.durationTicks))
-      )
-    )
-  }, [tracks])
 
   return (
     <table className={styles['container']}>
