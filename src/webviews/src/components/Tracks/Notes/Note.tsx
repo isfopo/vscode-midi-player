@@ -27,8 +27,8 @@ export const Note: React.FC<NoteProps> = ({
   offset,
 }) => {
   const x = useMemo<number>(() => {
-    return boxWidth * (note.ticks / duration) * zoom
-  }, [note.ticks, boxWidth, duration, zoom])
+    return boxWidth * (note.ticks / duration) * zoom - offset
+  }, [note.ticks, boxWidth, duration, zoom, offset])
 
   const width = useMemo<number>(() => {
     return boxWidth * (note.durationTicks / duration) * zoom
