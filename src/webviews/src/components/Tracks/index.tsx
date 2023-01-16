@@ -16,6 +16,7 @@ export interface TracksProps {
 }
 
 const MAX_ZOOM = 128
+const TRACK_WIDTH = 128
 
 export const Tracks: React.FC<TracksProps> = ({ tracks }) => {
   const [expandedTrack, setExpandedTrack] = useState<number>(-1)
@@ -29,16 +30,20 @@ export const Tracks: React.FC<TracksProps> = ({ tracks }) => {
   }, [tracks])
 
   const {
-    point: offset,
-    increase: increaseOffset,
-    decrease: decreaseOffset,
-  } = usePointInRange(duration, { step: 5 })
-
-  const {
     point: zoom,
     increase: increaseZoom,
     decrease: decreaseZoom,
   } = usePointInRange(MAX_ZOOM, { min: 1, initial: 1 })
+
+  const {
+    point: offset,
+    increase: increaseOffset,
+    decrease: decreaseOffset,
+  } = usePointInRange(TRACK_WIDTH, {
+    step: 5,
+    update: useCallback(offset => offset + zoom, [zoom]),
+    deps: [zoom],
+  })
 
   const onClick = useCallback((index: number) => {
     setExpandedTrack(index)
@@ -82,6 +87,7 @@ export const Tracks: React.FC<TracksProps> = ({ tracks }) => {
             index={index}
             track={track}
             duration={duration}
+            width={TRACK_WIDTH}
             isExpanded={index === expandedTrack}
             setExpandedTrack={setExpandedTrack}
             zoom={zoom}

@@ -6,6 +6,7 @@ export interface TrackProps {
   index: number
   track: ITrack
   duration: number
+  width: number
   isExpanded: boolean
   setExpandedTrack: React.Dispatch<React.SetStateAction<number>>
   zoom: number
@@ -16,6 +17,7 @@ export const Track: React.FC<TrackProps> = ({
   index,
   track,
   duration,
+  width,
   isExpanded,
   setExpandedTrack,
   zoom,
@@ -47,6 +49,7 @@ export const Track: React.FC<TrackProps> = ({
         <Notes
           notes={track.notes}
           duration={duration}
+          width={width}
           isExpanded={isExpanded}
           zoom={zoom}
           offset={offset}
