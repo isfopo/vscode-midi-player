@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { Track as ITrack } from '@tonejs/midi'
 import { Notes } from './Notes'
 
@@ -28,17 +28,33 @@ export const Track: React.FC<TrackProps> = ({
     [track]
   )
 
-  if (track.notes.length === 0) {
-    // TODO: have toggle to show hidden tracks
-    return <></>
-  }
+  const [mouseDown, setMouseDown] = useState<boolean>(false)
+
+  const onMouseMove = useCallback(
+    (event: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => {
+      if (mouseDown) {
+        console.log(event)
+      }
+    },
+    [mouseDown]
+  )
 
   const onDoubleClick = useCallback(() => {
     setExpandedTrack(index)
   }, [index, setExpandedTrack])
 
+  if (track.notes.length === 0) {
+    // TODO: have toggle to show hidden tracks
+    return <></>
+  }
+
   return (
-    <tr onDoubleClick={onDoubleClick}>
+    <tr
+      onDoubleClick={onDoubleClick}
+      onMouseDown={() => setMouseDown(true)}
+      onMouseUp={() => setMouseDown(false)}
+      onMouseMove={onMouseMove}
+    >
       <td>
         <p>{index + 1}</p>
       </td>
