@@ -41,6 +41,7 @@ export const Tracks: React.FC<TracksProps> = ({ tracks }) => {
     decrease: decreaseOffset,
   } = usePointInRange(TRACK_WIDTH, {
     step: 5,
+    box: true,
     update: useCallback(offset => offset + zoom, [zoom]),
     deps: [zoom],
   })

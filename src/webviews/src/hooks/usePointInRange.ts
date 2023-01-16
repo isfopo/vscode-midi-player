@@ -4,6 +4,7 @@ export interface PointInRangeOptions {
   min?: number
   initial?: number
   step?: number
+  box?: boolean
   update?: (point: number) => number
   deps?: any[]
 }
@@ -14,6 +15,7 @@ export const usePointInRange = (
     min = 0,
     initial = min,
     step = 1,
+    box = false,
     update,
     deps = [],
   }: PointInRangeOptions = {}
@@ -23,14 +25,18 @@ export const usePointInRange = (
   const increase = useCallback(() => {
     if (point + step < max) {
       _setPoint(point + step)
+    } else if (box) {
+      _setPoint(max)
     }
   }, [point, step, max])
 
   const decrease = useCallback(() => {
     if (point - step >= min) {
       _setPoint(point - step)
+    } else if (box) {
+      _setPoint(min)
     }
-  }, [point, step, min])
+  }, [point, step, min, box])
 
   useEffect(() => {
     if (update) {
