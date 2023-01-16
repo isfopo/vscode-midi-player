@@ -33,12 +33,12 @@ export const Track: React.FC<TrackProps> = ({
     return <></>
   }
 
-  const onClick = useCallback(() => {
+  const onDoubleClick = useCallback(() => {
     setExpandedTrack(index)
   }, [index, setExpandedTrack])
 
   return (
-    <tr onClick={onClick}>
+    <tr onDoubleClick={onDoubleClick}>
       <td>
         <p>{index + 1}</p>
       </td>
