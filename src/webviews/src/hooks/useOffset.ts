@@ -3,18 +3,7 @@ import { useState, useRef, useCallback } from 'react'
 const TRACK_WIDTH = 256
 
 export const useOffset = (zoom: number) => {
-  // const {
-  //   point: offset,
-  //   increase: increaseOffset,
-  //   decrease: decreaseOffset,
-  // } = usePointInRange(TRACK_WIDTH * zoom, {
-  //   step: 1,
-  //   box: true,
-  //   update: useCallback(offset => offset + zoom, [zoom]),
-  //   deps: [zoom],
-  // })
-
-  const offset = useRef<number>(1)
+  const [offset, setOffset] = useState<number>(1)
 
   const [mouseDown, _setMouseDown] = useState<boolean>(false)
   const lastPosition = useRef<number | undefined>()
@@ -32,20 +21,24 @@ export const useOffset = (zoom: number) => {
       if (mouseDown) {
         if (lastPosition.current) {
           if (event.clientX < lastPosition.current) {
-            offset.current += lastPosition.current - event.clientX
+            setOffset(
+              offset => (offset += lastPosition.current! - event.clientX)
+            )
           } else if (event.clientX > lastPosition.current) {
-            offset.current -= event.clientX - lastPosition.current
+            setOffset(
+              offset => (offset -= event.clientX - lastPosition.current!)
+            )
           }
         }
 
         lastPosition.current = event.clientX
       }
     },
-    [mouseDown, lastPosition.current, offset.current]
+    [mouseDown, lastPosition.current, offset]
   )
 
   return {
-    offset: offset.current,
+    offset: offset,
     width: TRACK_WIDTH,
     setMouseDown,
     onMouseMove,
