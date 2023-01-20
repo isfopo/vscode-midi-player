@@ -32,10 +32,8 @@ export const useOffset = (zoom: number) => {
       if (mouseDown) {
         if (lastPosition.current) {
           if (event.clientX < lastPosition.current) {
-            // increaseOffset()
             offset.current += lastPosition.current - event.clientX
           } else if (event.clientX > lastPosition.current) {
-            // decreaseOffset()
             offset.current -= event.clientX - lastPosition.current
           }
         }
