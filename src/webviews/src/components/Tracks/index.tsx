@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useRef, useState } from 'react'
 import { Track as ITrack } from '@tonejs/midi'
 import { Track } from './Track'
 import styles from './index.module.css'
@@ -10,13 +10,13 @@ import {
   VscArrowLeft,
   VscArrowRight,
 } from 'react-icons/vsc'
+import { useOffset } from '../../hooks/useOffset'
 
 export interface TracksProps {
   tracks: ITrack[]
 }
 
 const MAX_ZOOM = 128
-const TRACK_WIDTH = 256
 
 export const Tracks: React.FC<TracksProps> = ({ tracks }) => {
   const [expandedTrack, setExpandedTrack] = useState<number>(-1)
@@ -35,16 +35,7 @@ export const Tracks: React.FC<TracksProps> = ({ tracks }) => {
     decrease: decreaseZoom,
   } = usePointInRange(MAX_ZOOM, { min: 1, initial: 1 })
 
-  const {
-    point: offset,
-    increase: increaseOffset,
-    decrease: decreaseOffset,
-    step: 5,
-  } = usePointInRange(TRACK_WIDTH * zoom, {
-    box: true,
-    update: useCallback(offset => offset + zoom, [zoom]),
-    deps: [zoom],
-  })
+  const { offset, width, onMouseMove, setMouseDown } = useOffset(zoom)
 
   const onClick = useCallback((index: number) => {
     setExpandedTrack(index)
@@ -54,13 +45,6 @@ export const Tracks: React.FC<TracksProps> = ({ tracks }) => {
     <table className={styles['container']}>
       <thead>
         <tr>
-          <th>
-            <ButtonBase
-              icon={<VscArrowLeft />}
-              onClick={decreaseOffset}
-              size="small"
-            />
-          </th>
           <th>
             <ButtonBase
               icon={<VscZoomIn />}
@@ -73,13 +57,6 @@ export const Tracks: React.FC<TracksProps> = ({ tracks }) => {
               size="small"
             />
           </th>
-          <th>
-            <ButtonBase
-              icon={<VscArrowRight />}
-              onClick={increaseOffset}
-              size="small"
-            />
-          </th>
         </tr>
       </thead>
       <tbody>
@@ -88,11 +65,13 @@ export const Tracks: React.FC<TracksProps> = ({ tracks }) => {
             index={index}
             track={track}
             duration={duration}
-            width={TRACK_WIDTH}
+            width={width}
             isExpanded={index === expandedTrack}
             setExpandedTrack={setExpandedTrack}
             zoom={zoom}
             offset={offset}
+            setMouseDown={setMouseDown}
+            onMouseMove={onMouseMove}
           />
         ))}
       </tbody>

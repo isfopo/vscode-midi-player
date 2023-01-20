@@ -11,6 +11,10 @@ export interface TrackProps {
   setExpandedTrack: React.Dispatch<React.SetStateAction<number>>
   zoom: number
   offset: number
+  onMouseMove: (
+    event: React.MouseEvent<HTMLTableRowElement, MouseEvent>
+  ) => void
+  setMouseDown: (mouseDown: boolean) => void
 }
 
 export const Track: React.FC<TrackProps> = ({
@@ -22,21 +26,12 @@ export const Track: React.FC<TrackProps> = ({
   setExpandedTrack,
   zoom,
   offset,
+  setMouseDown,
+  onMouseMove,
 }) => {
   const name = useMemo<string>(
     () => (track.name !== '' ? track.name : track.instrument.name),
     [track]
-  )
-
-  const [mouseDown, setMouseDown] = useState<boolean>(false)
-
-  const onMouseMove = useCallback(
-    (event: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => {
-      if (mouseDown) {
-        console.log(event)
-      }
-    },
-    [mouseDown]
   )
 
   const onDoubleClick = useCallback(() => {
