@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from 'react'
+import { limitMax, limitMin } from '../helpers/numbers'
 
 const TRACK_WIDTH = 256
 
@@ -21,12 +22,15 @@ export const useOffset = (zoom: number) => {
       if (mouseDown) {
         if (lastPosition.current) {
           if (event.clientX < lastPosition.current) {
-            setOffset(
-              offset => (offset += lastPosition.current! - event.clientX)
+            setOffset(offset =>
+              limitMax(
+                (offset += lastPosition.current! - event.clientX),
+                TRACK_WIDTH
+              )
             )
           } else if (event.clientX > lastPosition.current) {
-            setOffset(
-              offset => (offset -= event.clientX - lastPosition.current!)
+            setOffset(offset =>
+              limitMin((offset -= event.clientX - lastPosition.current!), 0)
             )
           }
         }
