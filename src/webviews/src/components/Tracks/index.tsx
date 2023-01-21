@@ -38,10 +38,6 @@ export const Tracks: React.FC<TracksProps> = ({ tracks }) => {
   const { offset, width, mouseDown, onMouseMove, setMouseDown } =
     useOffset(zoom)
 
-  const onClick = useCallback((index: number) => {
-    setExpandedTrack(index)
-  }, [])
-
   return (
     <table className={styles['container']}>
       <thead>
