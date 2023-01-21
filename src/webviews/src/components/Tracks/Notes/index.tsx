@@ -8,15 +8,20 @@ import { useStyleVariable } from '../../../hooks/useStyleVariable'
 export interface NotesProps {
   notes: INote[]
   duration: number
+  width: number
   isExpanded: boolean
+  zoom: number
+  offset: number
 }
 
 export const Notes: React.FC<NotesProps> = ({
   notes,
   duration,
+  width,
   isExpanded,
+  zoom,
+  offset,
 }) => {
-  const [width, setWidth] = useState<number>(128)
   const height = useMemo<number>(() => (isExpanded ? 24 : 12), [isExpanded])
   const range = useMemo<Range>(() => new Range(notes.map(n => n.midi)), [notes])
   const color = useStyleVariable(
@@ -43,6 +48,8 @@ export const Notes: React.FC<NotesProps> = ({
           boxWidth={width}
           boxHeight={height}
           color={color}
+          zoom={zoom}
+          offset={offset}
         />
       ))}
     </svg>

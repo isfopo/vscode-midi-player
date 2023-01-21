@@ -4,26 +4,43 @@
   gap: 0.5rem;
 }
 
-.container > tr {
+.container > thead > tr {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.container > thead > tr > th {
+  display: flex;
+  gap: 1rem;
+}
+
+.container > tbody > tr {
   background-color: var(--vscode-banner-background);
   padding: 0.5rem;
+  margin: 0.5rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
 }
 
-.container > tr > * {
+.container > tbody > tr > * {
   width: 12rem;
 }
 
-.container > tr > :first-child {
+.container > tbody > tr > :first-child {
   width: fit-content;
   color: var(--vscode-activityBarItem-profilesForeground);
   font-weight: 600;
 }
 
-.container > tr > :last-child {
+.container > tbody > tr > :last-child {
   width: 100%;
   height: 100%;
+  cursor: grab;
+}
+
+.mouse-down {
+  cursor: grabbing !important;
 }
