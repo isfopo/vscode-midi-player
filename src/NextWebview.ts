@@ -69,13 +69,10 @@ abstract class NextWebview {
     }'; connect-src https://*.github.io">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        
 				<link href="${webview.asWebviewUri(this._opts.styleUri)}" rel="stylesheet" />
         <script nonce="${this._opts.nonce}">
           window.acquireVsCodeApi = acquireVsCodeApi;
         </script>
-
-				<title>Next Webview</title>
 			</head>
 			<body>
 				<div id="root" data-route="${this._opts.route}"></div>			
