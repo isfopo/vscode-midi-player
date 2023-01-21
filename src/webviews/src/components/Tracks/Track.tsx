@@ -37,10 +37,6 @@ export const Track: React.FC<TrackProps> = ({
     [track]
   )
 
-  const onDoubleClick = useCallback(() => {
-    setExpandedTrack(index)
-  }, [index, setExpandedTrack])
-
   if (track.notes.length === 0) {
     // TODO: have toggle to show hidden tracks
     return <></>
@@ -48,7 +44,7 @@ export const Track: React.FC<TrackProps> = ({
 
   return (
     <tr
-      onDoubleClick={onDoubleClick}
+      onDoubleClick={() => setExpandedTrack(index)}
       onMouseDown={() => setMouseDown(true)}
       onMouseUp={() => setMouseDown(false)}
       onMouseLeave={() => setMouseDown(false)}
