@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { Track as ITrack } from '@tonejs/midi'
 import { Notes } from './Notes'
+import styles from './index.module.css'
 
 export interface TrackProps {
   index: number
@@ -11,6 +12,7 @@ export interface TrackProps {
   setExpandedTrack: React.Dispatch<React.SetStateAction<number>>
   zoom: number
   offset: number
+  mouseDown: boolean
   onMouseMove: (
     event: React.MouseEvent<HTMLTableRowElement, MouseEvent>
   ) => void
@@ -26,6 +28,7 @@ export const Track: React.FC<TrackProps> = ({
   setExpandedTrack,
   zoom,
   offset,
+  mouseDown,
   setMouseDown,
   onMouseMove,
 }) => {
@@ -48,6 +51,7 @@ export const Track: React.FC<TrackProps> = ({
       onDoubleClick={onDoubleClick}
       onMouseDown={() => setMouseDown(true)}
       onMouseUp={() => setMouseDown(false)}
+      onMouseLeave={() => setMouseDown(false)}
       onMouseMove={onMouseMove}
     >
       <td>
@@ -56,7 +60,7 @@ export const Track: React.FC<TrackProps> = ({
       <td>
         <p>{name}</p>
       </td>
-      <td>
+      <td className={mouseDown ? styles['mouse-down'] : null}>
         <Notes
           notes={track.notes}
           duration={duration}

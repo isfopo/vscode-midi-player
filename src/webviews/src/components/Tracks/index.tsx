@@ -35,7 +35,8 @@ export const Tracks: React.FC<TracksProps> = ({ tracks }) => {
     decrease: decreaseZoom,
   } = usePointInRange(MAX_ZOOM, { min: 1, initial: 1 })
 
-  const { offset, width, onMouseMove, setMouseDown } = useOffset(zoom)
+  const { offset, width, mouseDown, onMouseMove, setMouseDown } =
+    useOffset(zoom)
 
   const onClick = useCallback((index: number) => {
     setExpandedTrack(index)
@@ -70,6 +71,7 @@ export const Tracks: React.FC<TracksProps> = ({ tracks }) => {
             setExpandedTrack={setExpandedTrack}
             zoom={zoom}
             offset={offset}
+            mouseDown={mouseDown}
             setMouseDown={setMouseDown}
             onMouseMove={onMouseMove}
           />

@@ -44,6 +44,7 @@ export const useOffset = (zoom: number) => {
   return {
     offset: offset,
     width: TRACK_WIDTH,
+    mouseDown,
     setMouseDown,
     onMouseMove,
   }
