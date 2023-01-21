@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import { useCallback } from 'react'
 import * as Tone from 'tone'
 import { Piano } from '../instruments/Piano'
+import { selectInstrument } from '../instruments/selectInstrument'
 
 export const useTransport = (midi: Midi) => {
   const isSetup = useRef<boolean>(false)
@@ -38,7 +39,7 @@ export const useTransport = (midi: Midi) => {
 
     //************** Create Synths and Parts, one for each track  ********************
     for (let i = 0; i < midi.tracks.length; i++) {
-      synths[i] = new Piano(() => {
+      synths[i] = selectInstrument(midi.tracks[i], () => {
         new Tone.Part((time, value) => {
           synths[i].triggerAttackRelease(
             value.name,
