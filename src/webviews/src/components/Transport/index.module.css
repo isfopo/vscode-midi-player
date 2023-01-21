@@ -7,7 +7,13 @@
   width: 100%;
 }
 
+.container > :first-child,
+.container > :last-child {
+  width: 4rem;
+}
+
 .container > span {
   display: flex;
+  justify-content: center;
   gap: 0.5rem;
 }

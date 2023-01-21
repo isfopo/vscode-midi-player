@@ -7,7 +7,7 @@
 .container > thead > tr {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .container > thead > tr > th {
