@@ -25,7 +25,7 @@ export const useOffset = (zoom: number) => {
             setOffset(offset =>
               limitMax(
                 (offset += lastPosition.current! - event.clientX),
-                TRACK_WIDTH
+                TRACK_WIDTH * zoom
               )
             )
           } else if (event.clientX > lastPosition.current) {
