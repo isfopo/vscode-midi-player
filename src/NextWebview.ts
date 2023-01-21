@@ -66,7 +66,7 @@ abstract class NextWebview {
           webview.cspSource
         } 'self' data:; style-src ${webview.cspSource}; script-src 'nonce-${
       this._opts.nonce
-    }';">
+    }'; connect-src https://*.github.io">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         
