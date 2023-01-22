@@ -36,7 +36,8 @@ export class Piano extends Tone.Sampler {
         C8: 'C8.mp3',
       },
       release: 1,
-      baseUrl: 'https://tonejs.github.io/audio/salamander/',
+      baseUrl:
+        'https://isfopo.github.io/vscode-midi-player/samples/acoustic-grand-piano/',
       onload,
     })
   }
