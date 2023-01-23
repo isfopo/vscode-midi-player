@@ -3,6 +3,7 @@ import * as Tone from 'tone'
 import { AcousticGuitarNylon } from './guitar/AcousticGuitarNylon'
 import { Piano } from './piano/Piano'
 import { Vibraphone } from './chromatic-percussion/Vibraphone'
+import { AcousticBass } from './bass/AcousticBass'
 
 export const selectInstrument = (track: Track, onload: () => void) => {
   switch (track.instrument.family) {
@@ -66,6 +67,7 @@ export const selectInstrument = (track: Track, onload: () => void) => {
     case 'bass':
       switch (track.instrument.number) {
         case 32:
+          return new AcousticBass(onload)
         case 33:
         case 34:
         case 35:
@@ -73,9 +75,8 @@ export const selectInstrument = (track: Track, onload: () => void) => {
         case 37:
         case 38:
         case 39:
-          return new Piano(onload)
         default:
-          return new Piano(onload)
+          return new AcousticBass(onload)
       }
     case 'strings':
       switch (track.instrument.number) {
@@ -156,9 +157,9 @@ export const selectInstrument = (track: Track, onload: () => void) => {
         case 5:
         case 6:
         case 7:
-          return new Piano(onload)
+          return new Tone.Sampler()
         default:
-          return new Piano(onload)
+          return new Tone.Sampler()
       }
     default:
       return new Piano(onload)
