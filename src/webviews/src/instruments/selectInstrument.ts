@@ -1,5 +1,6 @@
 import { Track } from '@tonejs/midi'
 import * as Tone from 'tone'
+import { AcousticGuitarNylon } from './AcousticGuitarNylon'
 import { Piano } from './Piano'
 
 export const selectInstrument = (track: Track, onload: () => void) => {
@@ -56,9 +57,9 @@ export const selectInstrument = (track: Track, onload: () => void) => {
         case 29:
         case 30:
         case 31:
-          return new Piano(onload)
+          return new AcousticGuitarNylon(onload)
         default:
-          return new Piano(onload)
+          return new AcousticGuitarNylon(onload)
       }
     case 'bass':
       switch (track.instrument.number) {
