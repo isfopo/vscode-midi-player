@@ -1,8 +1,8 @@
 import { Track } from '@tonejs/midi'
 import * as Tone from 'tone'
-import { AcousticGuitarNylon } from './AcousticGuitarNylon'
-import { Piano } from './Piano'
-import { Vibraphone } from './Vibraphone'
+import { AcousticGuitarNylon } from './guitar/AcousticGuitarNylon'
+import { Piano } from './piano/Piano'
+import { Vibraphone } from './chromatic-percussion/Vibraphone'
 
 export const selectInstrument = (track: Track, onload: () => void) => {
   switch (track.instrument.family) {

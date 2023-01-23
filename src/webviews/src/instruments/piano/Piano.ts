@@ -37,7 +37,7 @@ export class Piano extends Tone.Sampler {
       },
       release: 1,
       baseUrl:
-        'https://isfopo.github.io/vscode-midi-player/samples/acoustic-grand-piano/',
+        'https://isfopo.github.io/vscode-midi-player/samples/piano/acoustic-grand-piano/',
       onload,
     })
   }

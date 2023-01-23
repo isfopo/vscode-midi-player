@@ -32,7 +32,7 @@ export class Vibraphone extends Tone.Sampler {
       },
       release: 1,
       baseUrl:
-        'https://isfopo.github.io/vscode-midi-player/samples/vibraphone/',
+        'https://isfopo.github.io/vscode-midi-player/samples/chromatic-percussion/vibraphone/',
       onload,
     })
   }

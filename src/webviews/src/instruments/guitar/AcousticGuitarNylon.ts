@@ -41,7 +41,7 @@ export class AcousticGuitarNylon extends Tone.Sampler {
       },
       release: 1,
       baseUrl:
-        'https://isfopo.github.io/vscode-midi-player/samples/acoustic-guitar-nylon/',
+        'https://isfopo.github.io/vscode-midi-player/samples/guitar/acoustic-guitar-nylon/',
       onload,
     })
   }
