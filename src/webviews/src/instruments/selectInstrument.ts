@@ -2,6 +2,7 @@ import { Track } from '@tonejs/midi'
 import * as Tone from 'tone'
 import { AcousticGuitarNylon } from './AcousticGuitarNylon'
 import { Piano } from './Piano'
+import { Vibraphone } from './Vibraphone'
 
 export const selectInstrument = (track: Track, onload: () => void) => {
   switch (track.instrument.family) {
@@ -26,6 +27,7 @@ export const selectInstrument = (track: Track, onload: () => void) => {
         case 10:
         case 11:
         case 12:
+          return new Vibraphone(onload)
         case 13:
         case 14:
         case 15:
