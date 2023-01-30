@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import { useRef } from 'react'
 import { useCallback } from 'react'
 import * as Tone from 'tone'
-import { Piano } from '../instruments/Piano'
 import { selectInstrument } from '../instruments/selectInstrument'
 
 export const useTransport = (midi: Midi) => {
