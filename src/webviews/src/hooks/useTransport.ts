@@ -83,5 +83,11 @@ export const useTransport = (midi: Midi) => {
     }
   }, [])
 
-  return { play, stop, pause, position }
+  return {
+    play,
+    stop,
+    pause,
+    position,
+    loaded: parts.current.length === midi.tracks.length,
+  }
 }
