@@ -6,6 +6,7 @@ import { Vibraphone } from './chromatic-percussion/Vibraphone'
 import { AcousticBass } from './bass/AcousticBass'
 import { AcousticKit } from './drums/AcousticKit'
 import { Violin } from './strings/Violin'
+import { Timpani } from './strings/TImpani'
 
 export const selectInstrument = (track: Track, onload: () => void) => {
   switch (track.instrument.family) {
@@ -91,7 +92,7 @@ export const selectInstrument = (track: Track, onload: () => void) => {
         case 45:
         case 46:
         case 47:
-          return new Piano(onload)
+          return new Timpani(onload)
         default:
           return new Piano(onload)
       }
