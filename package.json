@@ -9,7 +9,8 @@
     "lint": "eslint . --ext .ts,.tsx",
     "watch": "tsc -watch -p ./",
     "format": "prettier --write **/*.ts",
-    "dev": "vite build"
+    "dev": "vite build",
+    "convert-to-mp3": "for i in *.wav; do ffmpeg -i \"$1\" \"${i%.*}.mp3\"; done;"
   },
   "engines": {
     "vscode": "^1.74.0"
