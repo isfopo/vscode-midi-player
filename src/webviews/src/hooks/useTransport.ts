@@ -1,5 +1,4 @@
 import { Midi } from '@tonejs/midi'
-import { Note } from '@tonejs/midi/dist/Note'
 import { useEffect, useState } from 'react'
 import { useRef } from 'react'
 import { useCallback } from 'react'
@@ -16,7 +15,7 @@ export const useTransport = (midi: Midi) => {
     Tone.Transport.PPQ = midi.header.ppq
     const synths: Tone.Sampler[] = []
 
-    //************** Tell Transport about Time Signature changes  ********************
+    //************** Tell Transport about Time Signature changes  **************
     for (let i = 0; i < midi.header.timeSignatures.length; i++) {
       Tone.Transport.schedule(time => {
         Tone.Transport.timeSignature =
@@ -24,14 +23,14 @@ export const useTransport = (midi: Midi) => {
       }, midi.header.timeSignatures[i].ticks + 'i')
     }
 
-    //************** Tell Transport about bpm changes  ********************
+    //************** Tell Transport about bpm changes  **************
     for (let i = 0; i < midi.header.tempos.length; i++) {
       Tone.Transport.schedule(time => {
         Tone.Transport.bpm.value = midi.header.tempos[i].bpm
       }, midi.header.tempos[i].ticks + 'i')
     }
 
-    //************** Create Synths and Parts, one for each track  ********************
+    //************** Create Synths and Parts, one for each track  **************
     for (let i = 0; i < midi.tracks.length; i++) {
       synths[i] = selectInstrument(midi.tracks[i], () => {
         parts.current.push(
